@@ -1,0 +1,36 @@
+---
+title: AutoGen Connector
+description: Integrate SEMP with AutoGen agents
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="note">
+The AutoGen connector is currently in development. This page outlines the planned integration approach.
+</Aside>
+
+## Overview
+
+The AutoGen connector allows AutoGen agents to read and write SEMP signals, enabling stigmergic coordination alongside AutoGen's native orchestration.
+
+## Planned Integration
+
+```typescript
+import { SEMPConnector } from '@selsemp/connector-autogen';
+
+const connector = new SEMPConnector({
+  environment: 'https://app.selsemp.dev',
+  apiKey: 'your-api-key',
+});
+
+// Attach to your AutoGen agent
+// Signals are automatically deposited and read
+```
+
+## Status
+
+- Protocol specification: complete
+- Connector implementation: in progress
+- Documentation: coming soon
+
+Follow development on [GitHub](https://github.com/selsemp/semp-protocol).

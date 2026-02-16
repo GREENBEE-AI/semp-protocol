@@ -1,0 +1,36 @@
+---
+title: LangGraph Connector
+description: Integrate SEMP with LangGraph agents
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="note">
+The LangGraph connector is currently in development. This page outlines the planned integration approach.
+</Aside>
+
+## Overview
+
+The LangGraph connector allows LangGraph agents to read and write SEMP signals, enabling stigmergic coordination alongside LangGraph's native orchestration.
+
+## Planned Integration
+
+```typescript
+import { SEMPConnector } from '@selsemp/connector-langgraph';
+
+const connector = new SEMPConnector({
+  environment: 'https://app.selsemp.dev',
+  apiKey: 'your-api-key',
+});
+
+// Attach to your LangGraph agent
+// Signals are automatically deposited and read
+```
+
+## Status
+
+- Protocol specification: complete
+- Connector implementation: in progress
+- Documentation: coming soon
+
+Follow development on [GitHub](https://github.com/selsemp/semp-protocol).
