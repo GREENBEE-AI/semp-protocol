@@ -81,6 +81,82 @@ await client.signal({
 
 **Result:** Zero collisions. Zero idle time. Each robot follows the strongest signal trail.
 
+## Physical AI: Mixed Robot Fleet Coordination
+
+SEMP coordinates heterogeneous robot fleets -- mobile robots, arms, humanoids, and drones -- in shared physical spaces without direct messaging.
+
+### Scenario
+
+A warehouse deploys 50+ robots across multiple fleets. Mobile robots pick items, arms assemble packages, and humanoids handle complex tasks. SEMP coordinates zone congestion, handoffs, and battery management through the shared environment.
+
+```typescript
+// Mobile robot detects congestion in aisle A
+await client.signal({
+  type: 'PROPOSAL',
+  scope: 'facility/wh-1/fleet/picking/robot/mobile-07/zone_congestion',
+  payload: {
+    action: 'zone_congestion',
+    zone_id: 'aisle-a',
+    occupancy_count: 3,
+    max_occupancy: 3,
+    congestion_level: 'congested',
+  },
+  strength: 1.0,
+});
+
+// Other robots read congestion signals and reroute
+const congestion = await client.read({
+  scope: 'facility/wh-1/fleet/picking/*/zone_congestion',
+  minStrength: 0.3,
+});
+
+if (congestion.some(s => s.payload.zone_id === 'aisle-a')) {
+  // Reroute around aisle A — no direct message needed
+}
+
+// Mobile robot arrives at assembly station, signals ready for handoff
+await client.signal({
+  type: 'READY',
+  scope: 'facility/wh-1/fleet/picking/robot/mobile-07/handoff_ready',
+  payload: {
+    action: 'handoff_ready',
+    station_id: 'station-b',
+    payload_type: 'package-SKU-4829',
+  },
+  strength: 1.0,
+});
+
+// Arm robot reads environment, picks up handoff
+const handoffs = await client.read({
+  scope: 'facility/wh-1/*/handoff_ready',
+  minStrength: 0.5,
+  filter: { 'payload.station_id': 'station-b' },
+});
+
+// Fleet supervisor rewards successful coordination
+await client.signal({
+  type: 'REWARD',
+  scope: 'facility/wh-1/fleet/picking/fleet_status',
+  payload: {
+    value: 0.7,
+    reason: 'Congestion resolved via autonomous rerouting, zero collisions',
+  },
+  strength: 1.0,
+});
+```
+
+### How Signal Decay Works for Robots
+
+| Signal Type | Decay Rate (λ) | Why |
+|-------------|----------------|-----|
+| `collision_risk` | 0.80 (fast) | Safety signals must be current — 3h half-life |
+| `zone_congestion` | 0.85 (fast) | Traffic patterns change quickly — 4h half-life |
+| `handoff_ready` | 0.82 (fast) | Handoff windows are time-sensitive — 3.5h half-life |
+| `battery_level` | 0.97 (slow) | Battery changes gradually — 23h half-life |
+| `maintenance_need` | 0.96 (slow) | Persists until addressed — 17h half-life |
+
+**Key insight:** Safety-critical signals (collision risk) decay 10x faster than operational signals (battery level). The same decay mechanism that manages farming irrigation decisions manages robot fleet coordination.
+
 ## Energy Grid: Distributed Load Balancing
 
 1000 solar panels, 500 batteries, 1 grid. Agents signal surplus and demand.
