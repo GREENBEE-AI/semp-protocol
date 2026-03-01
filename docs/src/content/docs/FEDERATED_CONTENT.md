@@ -1,3 +1,7 @@
+---
+title: Federated Content
+---
+
 # Federated Content
 
 Federated content is any information imported from outside this repository. This document defines how to classify, validate, and integrate external context into the Ant-Digest workflow.

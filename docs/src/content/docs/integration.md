@@ -1,3 +1,7 @@
+---
+title: Integration Guide
+---
+
 # Integration Guide
 
 This guide shows how to integrate SEL/SEMP with popular AI agent frameworks.

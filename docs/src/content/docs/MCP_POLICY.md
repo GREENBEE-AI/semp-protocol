@@ -1,3 +1,7 @@
+---
+title: MCP Policy
+---
+
 # MCP Policy
 
 This document defines which MCP (Model Context Protocol) servers, tools, and operations are permitted during the Ant-Digest workflow. All MCP tool usage must pass through this policy gate before execution.

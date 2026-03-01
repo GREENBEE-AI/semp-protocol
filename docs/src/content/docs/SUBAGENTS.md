@@ -1,3 +1,7 @@
+---
+title: Subagent Roles and Output Contracts
+---
+
 # Subagent Roles and Output Contracts
 
 Subagents are specialized Task agents invoked during the Ant-Digest workflow. Each has a defined role, input contract, and output contract. The orchestrating agent (the main Claude session) is responsible for routing work and validating outputs.

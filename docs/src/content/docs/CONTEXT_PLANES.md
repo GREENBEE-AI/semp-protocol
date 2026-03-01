@@ -1,3 +1,7 @@
+---
+title: Context Planes
+---
+
 # Context Planes
 
 Context planes classify where information originates and how much trust it carries. Every piece of context consumed or produced during a workflow step must be tagged with its plane.

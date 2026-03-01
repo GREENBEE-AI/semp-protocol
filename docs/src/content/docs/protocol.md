@@ -1,3 +1,7 @@
+---
+title: SEMP Protocol Specification
+---
+
 # SEMP Protocol Specification
 
 **Version:** 0.1  

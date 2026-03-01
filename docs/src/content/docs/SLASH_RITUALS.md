@@ -1,3 +1,7 @@
+---
+title: Slash Rituals
+---
+
 # Slash Rituals
 
 Slash rituals are structured checkpoints in the Ant-Digest v2 workflow. Each ritual maps to one or more ANTROUTE steps and produces a specific, traceable output. They are called "rituals" because they must be performed in order, every time, without shortcuts.

@@ -1,3 +1,7 @@
+---
+title: API Reference
+---
+
 # API Reference
 
 SEL/SEMP provides REST and WebSocket APIs for event-driven agent coordination.

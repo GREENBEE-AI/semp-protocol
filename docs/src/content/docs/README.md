@@ -1,3 +1,7 @@
+---
+title: SEL/SEMP Documentation
+---
+
 # SEL/SEMP Documentation
 
 Welcome to the SEL/SEMP documentation! This guide will help you understand and integrate with the platform.
