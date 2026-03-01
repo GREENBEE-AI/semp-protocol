@@ -2,7 +2,8 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  site: 'https://docs.selsemp.dev',
+  site: 'https://GREENBEE-AI.github.io',
+  base: '/semp-protocol',
   integrations: [
     starlight({
       title: 'SEMP Protocol',
